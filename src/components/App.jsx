@@ -4,9 +4,16 @@ import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 import Footer from './Footer/Footer';
-
+import { AppContainer, AppHeading } from './App.styled';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
+  const notify = {
+    error: message => toast.error(message),
+    success: message => toast.success(message),
+  };
+
   const KEY = 'contacts';
   const [filter, setFilter] = useState('');
 
@@ -23,16 +30,18 @@ export const App = () => {
   };
 
   const handleAddContact = newContact => {
+        
     const isExistingContact = contacts.some(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
 
     if (isExistingContact) {
-      alert(`${newContact.name} is already in contacts`);
+      notify.error(`${newContact.name} is already in contacts`);
       return;
-    }
+    } 
 
-    setContacts(prevContacts => [...prevContacts, newContact]);
+    setContacts(prevContacts => [...prevContacts, newContact])
+    notify.success(`${newContact.name} added to contacts`);
   };
 
   const handleDeleteContact = contactId => {
@@ -46,18 +55,19 @@ export const App = () => {
   );
 
   return (
-    <>
-        <h1>Phonebook</h1>
-        <ContactForm contacts={contacts} onAddContact={handleAddContact} />
+    <AppContainer>
+      <ToastContainer autoClose={3000} />
+      <AppHeading>Phonebook</AppHeading>
+      <ContactForm contacts={contacts} onAddContact={handleAddContact} />
 
-        <h2>Contacts</h2>
-        <Filter value={filter} onChange={handleFilterChange} />
-        <ContactList
-          contacts={filteredContacts}
-          onDeleteContact={handleDeleteContact}
-        />
+      <h2>Contacts</h2>
+      <Filter value={filter} onChange={handleFilterChange} />
+      <ContactList
+        contacts={filteredContacts}
+        onDeleteContact={handleDeleteContact}
+      />
       <Footer />
-    </>
+    </AppContainer>
   );
 };
 
@@ -70,5 +80,3 @@ App.propTypes = {
     })
   ),
 };
-
-

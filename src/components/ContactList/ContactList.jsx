@@ -1,5 +1,6 @@
-import PropType from 'prop-types';
-import { List, ListItem, ContactName, ContactNumber, DeleteButton } from './ContactList.styled'
+import PropTypes from 'prop-types';
+import { List, ListItem, ContactName, ContactNumber, DeleteButton } from './ContactList.styled';
+import { FaTrash } from 'react-icons/fa';
 
 const ContactList = ({ contacts, onDeleteContact }) => (
   <List>
@@ -8,7 +9,7 @@ const ContactList = ({ contacts, onDeleteContact }) => (
         <ContactName>{name}:</ContactName>
         <ContactNumber>{number}</ContactNumber>
         <DeleteButton type="button" onClick={() => onDeleteContact(id)}>
-          Delete
+          <FaTrash />
         </DeleteButton>
       </ListItem>
     ))}
@@ -18,12 +19,12 @@ const ContactList = ({ contacts, onDeleteContact }) => (
 export default ContactList;
 
 ContactList.propTypes = {
-  contacts: PropType.arrayOf(
-    PropType.shape({
-      id: PropType.string.isRequired,
-      name: PropType.string.isRequired,
-      number: PropType.string.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
     })
   ),
-  onDeleteContact: PropType.func.isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
 };
