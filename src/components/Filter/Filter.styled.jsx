@@ -5,10 +5,13 @@ export const Label = styled.label`
     margin-bottom: 5px;
     font-weight: 700;
     font-size: 16px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
 `;
 export const Input = styled.input `
     display: block;
-    width: 100%;
+    
     padding: 10px;
     font-size: 16px;
     border-radius: 3px;
