@@ -8,13 +8,14 @@ import { AppContainer, AppHeading } from './App.styled';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const App = () => {
-  const notify = {
-    error: message => toast.error(message),
-    success: message => toast.success(message),
-  };
+const notify = {
+  error: message => toast.error(message),
+  success: message => toast.success(message),
+};
 
-  const KEY = 'contacts';
+const KEY = 'contacts';
+
+export const App = () => {
   const [filter, setFilter] = useState('');
 
   const [contacts, setContacts] = useState(() => {
@@ -30,7 +31,6 @@ export const App = () => {
   };
 
   const handleAddContact = newContact => {
-        
     const isExistingContact = contacts.some(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
@@ -38,9 +38,9 @@ export const App = () => {
     if (isExistingContact) {
       notify.error(`${newContact.name} is already in contacts`);
       return;
-    } 
+    }
 
-    setContacts(prevContacts => [...prevContacts, newContact])
+    setContacts(prevContacts => [...prevContacts, newContact]);
     notify.success(`${newContact.name} added to contacts`);
   };
 
